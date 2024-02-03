@@ -95,7 +95,7 @@ Eine vollständige Liste lässt sich über `Alt + Shift + K` (Mac (`Options+ Shi
 Diese short-cuts sind wirklich nicht zu unterschätzen. Ihr könnt euch einiges an Zeit und Arbeit ersparen, indem ihr die wichtigsten lernt und beherrscht:
 
 | Short-Cut (Windows & Linux) |          Short-Cut (Mac)          |                       Funktion                        |
-|:---------------------------:|:---------------------------------:|:-----------------------------------------------------:|
+|:----------------:|:-------------------:|:-------------------------------:|
 |         `Strg + Z`          |             `Cmd + Z`             |                   Rückgängig machen                   |
 |       `Strg + Enter`        |          `Cmd + Return`           | Die Zeile ausführen / Den ausgewählten Code ausführen |
 |      `Strg + Alt + R`       |        `Cmd + Option + R`         |             Den kompletten Code ausführen             |
@@ -224,7 +224,7 @@ autoplot(vergleich)
 Eine gute Art zu Vektorisieren ist über die Funktionen der `apply`-Familie möglich:
 
 | Funktion | Ziel                                                             | Input                         | Output               |
-|----------|------------------------------------------------------------------|-------------------------------|----------------------|
+|-----------------|----------------------|-----------------|-----------------|
 | `apply`  | Eine Funktion auf die Zeilen oder Spalten (oder beides) anwenden | data frame oder Matrix        | Vektor, Liste, Array |
 | `lapply` | Eine Funktion auf alle Elemente eines inputs anwenden            | Liste, Vektor oder data frame | Liste                |
 | `sapply` | Eine Funktion auf alle Elemente eines inputs anwenden            | Liste, Vektor oder data frame | Vektor oder Matrix   |

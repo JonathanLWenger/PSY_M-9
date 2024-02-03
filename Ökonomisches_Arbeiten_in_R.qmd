@@ -1,9 +1,10 @@
 ---
-title: "Ökonomisches Arbeiten in R"
-author: "Jonathan Wenger"
+title: Ökonomisches Arbeiten in R
+author: Jonathan Wenger
 format: 
   html:
     embed-resources: true
+    self-contained: true
 editor: visual
 toc: true
 toc-depth: 4
@@ -18,7 +19,7 @@ Dieses Skript soll euch dabei helfen, besser und effizienter in R zu arbeiten. D
 
 -   short-cuts
 
--   Schleifen
+-   Schleifen und deren Alternativen
 
 ## 1. R auf dem neuesten Stand halten
 
@@ -49,15 +50,15 @@ Auch hier lohnt es sich, auf dem aktuellen Stand zu bleiben. Nicht nur wird die 
 update.packages()
 ```
 
-Alternativ auch möglich über den Reiter **Packages -\> Update**. Hier empfiehlt es sich jedoch, vor einem größeren Projekt (z.B. der Masterarbeit) einmal alles zu updaten und dann während des Projekts keine Updates durchzuführen. So seid ihr auf der sicheren Seite, dass sich nichts wichtiges für euch ändert, während ihr dranarbeitet.
+Alternativ auch möglich über den Reiter **Packages -\> Update**. Hier empfiehlt es sich jedoch, vor einem größeren Projekt (z.B. der Masterarbeit) einmal alles zu updaten und dann während des Projekts keine Updates durchzuführen. So seid ihr auf der sicheren Seite, dass sich nichts wichtiges für euch ändert, während ihr daran arbeitet.
 
 Wenn ihr dennoch automatisch alle packages updaten wollt, könnt ihr das tun, indem ihr update.packages(ask = FALSE) in eurer .Rprofile file hinzufügt (wenn ihr nicht wisst, was das ist, dann lasst am besten die Finger davon).
 
 ### 1.3 Package Management
 
-Wenn ihr an einem größeren R Projekt sitzt, werdet ihr vermutlich viele verschiedene packages benutzen. Um da nicht den Überblick zu verlieren, empfiehlt es sich, diese gesammelt am Start des Dokuments zu laden.
+Wenn ihr an einem größeren R Projekt sitzt, werdet ihr vermutlich viele verschiedene packages benutzen. Um da nicht den Überblick zu verlieren, kann es hilfreich sein, diese gesammelt am Start des Dokuments zu laden.
 
-Bei der Auswahl der richtigen Packages, können die folgenden Seiten helfen:
+Bei der Auswahl der richtigen packages können die folgenden Seiten helfen:
 
 -   <https://www.rdocumentation.org/>
 
@@ -71,11 +72,11 @@ Bei der Auswahl der richtigen Packages, können die folgenden Seiten helfen:
 
 ## 2. Effiziente Skriptbearbeitung
 
-Das vielleicht wichtigste tool, um wirklich effizient und ökonomisch in R arbeiten zu können. Auch wenn RStudio einem mit seiner graphischen Benutzeroberfläche viel abnehmen (möchte) kann der richtige Umgang mit short-cuts einem das Leben um einiges erleichtern.
+Das vielleicht wichtigste tool, um wirklich effizient und ökonomisch in R arbeiten zu können. Auch wenn RStudio einem mit seiner graphischen Benutzeroberfläche viel abnehmen (möchte), kann der richtige Umgang mit short-cuts einem das Leben um einiges erleichtern.
 
 ### 2.1 Auto-Vervollständigung
 
-`Tab` und `Enter` auto-verollständigen den Code. So reicht es aus, "micr" einzugeben und `Tab` zu drücken, um `microbenchmark` entstehen zu lassen. Wenn R mehrere Möglichkeiten angibt, so kann man mit den Pfeiltasten die passende auswählen und dann ebenfalls mit `Tab` ausführen. Sollte R nicht automatisch Vorschläge geben, kann man sich diese mit `Tab` mit anzeigen lassen. Das ist besonders dann hilfreich, wenn man nur die ersten 1-2 Buchstaben eingeben hat.
+`Tab` und `Enter` auto-verollständigen den Code. So reicht es z.B. aus, "micr" einzugeben und `Tab` zu drücken, um `microbenchmark` entstehen zu lassen. Wenn R mehrere Möglichkeiten angibt, so kann man mit den Pfeiltasten die passende auswählen und dann ebenfalls mit `Tab` ausführen. Sollte R nicht automatisch Vorschläge geben, kann man sich diese mit `Tab` anzeigen lassen. Das ist besonders dann hilfreich, wenn man nur die ersten 1-2 Buchstaben eingeben hat.
 
 Diese Auswahl funktioniert auch mit Spalten in einem dataframe. In dem unteren Datensatz kann man so leicht, nachdem man das `$` eingefügt hat, eine der vier Spalten mit den Pfeiltasten auswählen und mit `Tab` ausgeben lassen. Also: `Tab` ist euer bester Freund, gerade auch beim Bearbeiten von längeren Datensätzen.
 
@@ -87,7 +88,7 @@ iris$Petal.Length
 
 ### 2.2 Short-Cuts
 
-Eine vollständige Liste lässt sich über `Alt + Shift + K` aufrufen:
+Eine vollständige Liste lässt sich über `Alt + Shift + K` (Mac (`Options+ Shift + K)`) aufrufen:
 
 ![](images/clipboard-1382094675.png)
 
@@ -106,7 +107,7 @@ Diese short-cuts sind wirklich nicht zu unterschätzen. Ihr könnt euch einiges 
 |          `Alt + -`          |           `Option + -`            |                          \<-                          |
 |     `Strg + Shift + M`      |         `Cmd + Shift + M`         |                         %\>%                          |
 
-Das ist nur eine Auswahl. Schaut in der Liste der short-cuts nach, was ihr für eure Arbeiten gebrauchen könnte und versucht euch diese short-cuts anzueignen, wenn ihr schneller arbeiten wollt.
+Das ist nur eine Auswahl. Schaut in der Liste der short-cuts nach, was ihr für eure Arbeiten gebrauchen könntet und versucht euch diese short-cuts anzueignen, wenn ihr schneller arbeiten wollt.
 
 ### 2.3 Kommentare
 
@@ -223,13 +224,13 @@ autoplot(vergleich)
 Eine gute Art zu Vektorisieren ist über die Funktionen der `apply`-Familie möglich:
 
 | Funktion | Ziel                                                             | Input                         | Output               |
-|---------------|---------------------------|---------------|---------------|
+|----------------|------------------------|----------------|----------------|
 | `apply`  | Eine Funktion auf die Zeilen oder Spalten (oder beides) anwenden | data frame oder Matrix        | Vektor, Liste, Array |
 | `lapply` | Eine Funktion auf alle Elemente eines inputs anwenden            | Liste, Vektor oder data frame | Liste                |
 | `sapply` | Eine Funktion auf alle Elemente eines inputs anwenden            | Liste, Vektor oder data frame | Vektor oder Matrix   |
 | `tapply` | Eine Funktion auf eine Teilmenge eines inputs anwenden           | Vektor                        | Vektor               |
 
-Die Auswahl der passenden Funktion ist also davon abhängig, was das Ziel ist und in welchem output-Format ihr euer Ergebnis gerne haben würdet. Nachfolgend jeweils ein kurzes Beispiel für jede der vier Funktionen
+Die Auswahl der passenden Funktion ist also davon abhängig, was das Ziel ist und in welchem output-Format ihr euer Ergebnis gerne haben würdet. Nachfolgend gibt es jeweils ein kurzes Beispiel für jede der vier Funktionen.
 
 #### 3.1.1 apply
 
@@ -297,7 +298,7 @@ tapply(iris$Sepal.Length, iris$Species, mean)
 tapply(iris$Sepal.Width, iris$Species, max)
 ```
 
-Sind Schleifen also unnötig? Nein. Es gibt sicher einige Situationen, in denen R keine passende Funktion für das habt, was ihr tun wollt. Spezifische Änderungen an einem großen data frame lassen sich z.B. super über Schleifen lösen. Es kann allerdings hilfreich sein, vorher einmal zu schauen, ob es nicht schon passende Alternativen gibt, die schneller und effizienter sind, als die selbst geschriebene Schleife. Wichtig bei der Erstellung von Schleifen ist:
+Sind Schleifen also unnötig? Nein. Es gibt sicher einige Situationen, in denen R keine passende Funktion für das habt, was ihr tun wollt. Spezifische Änderungen an einem großen data frame lassen sich z.B. super über Schleifen lösen. Es kann allerdings von Vorteil sein, vorher einmal zu schauen, ob es nicht schon passende Alternativen gibt, die schneller und effizienter sind, als die selbst geschriebene Schleife. Wichtig bei der Erstellung von Schleifen ist:
 
 -   Ergebnisse, die nur einmal berechnet werden müssen, vor dem loop abspeichern und nicht immer neu berechnen
 
@@ -312,12 +313,13 @@ Sind Schleifen also unnötig? Nein. Es gibt sicher einige Situationen, in denen 
     ### 3.2 Ein Beispiel für eine schlechte und eine gute Schleife
 
     ```{r}
-    #Für jede Zahl von 1 bis 1000000 soll 15 addiert werden
+    #Für jede Zahl von 1 bis 1000000 soll 15 addiert werden und dann durch 2 geteilt werden
     loop1 <- function(i){
       for(i in 1:1000000){
       N1 <- i
       N2 <- 15
       N3 <- N1 + N2
+      N4 <- N3 / 2
       }
     }
     ```
@@ -330,14 +332,15 @@ An dieser Schleife kann man schon einiges fehlerhaftes feststellen:
 
 -   N2 sollte vor der Schleife deklariert werden
 
+-   N3 und N4 könnte man zusammenfassen in einem Rechenschritt
+
 Verbessert könnte das ganze so aussehen:
 
 ```{r}
 N2 = 15
-rep = 1:1000000
 loop2 <- function(rep){
   for(i in rep){
-    N3 <- i + N2
+    N3 <- (i + N2) / 2
   }
 }
 ```
@@ -346,15 +349,15 @@ Vergleich zwischen beiden Schleifen:
 
 ```{r}
 vergleich <- microbenchmark(times = 100, unit = "s", 
-               loop1(i), loop2(rep))
+               loop1(10^6), loop2(10^6))
 autoplot(vergleich)
 ```
 
-Die Unterschiede werden umso größer, je mehr Wiederholungen man in der Schleife durchführt
+Die Unterschiede werden umso "größer", je mehr Wiederholungen man in der Schleife durchführt. In diesem Beispiel können selbst große Datenmengen keine wirklichen Probleme verursachen.
 
 ```{r}
 vergleich <- microbenchmark(times = 100, unit = "s", 
-               loop1(10^7), loop2(10^7))
+               loop1(10^1000000), loop2(10^1000000))
 autoplot(vergleich)
 ```
 
@@ -366,4 +369,4 @@ autoplot(vergleich)
 
 -   <https://www.burns-stat.com/pages/Tutor/R_inferno.pdf>
 
-Bei dem ersten Link findet ihr eine Liste von verschiedenen Tutorials in R. Die letzten beiden Tutorials und Hilfen sind eher für Fortgeschrittene. Die meisten dort angesprochenen Problematiken und Themen sind vermutlich mehr, als das, was in den Masterarbeiten auf einen zu kommt. Bei Interesse an der Materie kann dies aber durchaus hilfreich und interessant sein.
+Bei dem ersten Link findet ihr eine Liste von verschiedenen Tutorials in R. Die letzten beiden Tutorials und Hilfen sind eher für Fortgeschrittene. Die meisten dort angesprochenen Problematiken und Themen sind vermutlich mehr als das, was in den Masterarbeiten auf einen zu kommt. Bei Interesse an der Materie kann dies aber durchaus hilfreich und interessant sein.
